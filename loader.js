@@ -1,6 +1,6 @@
-
-//function loadBooks(category, startIndex, maxResults) {}
-
+function loadBooks(category, startIndex, maxResults) {
+  key= AIzaSyDszvaaBOPGUYhjJ5L2m_OvNUPs6U6CH78;
+}
 
 document.querySelectorAll('nav-category-list li').forEach((category, index) => {
   category.addEventListener('click', () => {
