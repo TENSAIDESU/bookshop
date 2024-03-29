@@ -30,7 +30,6 @@ const getAndShowBooks = async () => {
     let averageRating = book.volumeInfo.averageRating;
     let ratingCount = book.volumeInfo.ratingCount; 
     let saleability = book.saleInfo.saleability;
-    let selfLink = book.selfLink;
     let price = '';
     let priceType = '';
 
@@ -40,54 +39,31 @@ const getAndShowBooks = async () => {
     }
     let newBook = showBooks(createCard(), img, authors, title, description, price, priceType, averageRating, ratingCount, selfLink);
     document.querySelector('.card').append(newBook);
-
-    if (bagshop.has(selfLink)){
-      swapBuyButton(newBook.querySelector('.buy-btn'))
-    }
   })
 }
- const showBooks = (Element, img, authors, title, description, price, priceType, averageRating, ratingCount) =>{
- let elementImage = Element.querySelector('.card_image img');
-elementImage.src = img;
-
-let elemetnAuthors = element.querySelector('.card_author');
-elemetnAuthors.innerText = authors;
-
-let elementTitle = element.querySelector('.card_title');
-if (title) elementTitle.innerText = title;
-let elementDescription = element.querySelector('.card_info');
-if(description) elementDescription.innerText = description;
-
-let elementprice = element.querySelector('.card_price');
-let fullprice=price+ priceType;
-if(fullprice) elementprice.innerText = fullprice;
-
-let elementaverageRating = element.querySelector('.card_Rating');
-if (averageRating) elementaverageRating.innerText = averageRating;
-
-let elementratingCount = element.querySelector('.card_count');
-elementratingCount = ratingCount;
- }
-
-const createCard = () => {
+function createCard ()  {
   let card = document.createElement('.div');
   card.className='cards_card';
 
-  card.innerHTML = `
-  <div class ="card_image">
-  <img src="" alt="book image">
-  </div>
-  <div class="card_desribtion">
-     <div class="card_author"></div>
-    <div class="card_title"></div>
-      <div class="rating">
-    <div class="card_rating"</div>  
-    <div class="card_count"</div>
-    </div>
-    <div class="card_info"></div>
-    <div class="card_price></div>
-  </div>
-  `
+  const image = document.createElement('img');
+  cover.src = book.img || "./imgslider/place-holder.png";
+  cover.alt = "Обложка книги";
+
+  const authors = document.createElement('p');
+  authors.textContent = `${book.authors.join(', ')}`;
+
+  const title = document.createElement('h3');
+  title.textContent = book.title;
+
+  const rating = document.createElement('p');
+  rating.textContent = ` ${'★'.repeat(Math.round(book.averageRating))} (${book.ratingCount} reviews)`;
+
+  const description = document.createElement('p');
+  description.textContent = book.description.length > 100 ? book.description.substring(0, 100) + "..." : book.description;
+
+  const price = document.createElement('p');
+  price.textContent = `${book.price} ${book.priceType}`;
+
   card.appendChild(image);
   card.appendChild(authors);
   card.appendChild(title);
@@ -101,6 +77,10 @@ const createCard = () => {
   }
 
   document.body.appendChild(card);
+}
+function renderBookCard(card) {
+ 
+renderBookCard(card);
 }
 document.querySelectorAll('nav-category-list li').forEach((category) => {
   category.addEventListener('click', () => {
